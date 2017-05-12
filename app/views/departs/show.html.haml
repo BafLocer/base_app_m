@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Название:
+  = @depart.d_name
+
+= link_to 'редактировать', edit_depart_path(@depart)
+\|
+= link_to 'назад', departs_path

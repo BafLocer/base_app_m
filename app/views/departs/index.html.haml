@@ -1,0 +1,37 @@
+=breadcrumb_tag do
+  %li.active
+    Отделы
+  %li
+    Администрирование
+
+.page-header
+  %h1= t('headers.departs.Список отделов')
+
+%table.table.table-hover.table-striped
+  %caption
+    = link_to new_depart_path, class: 'btn btn-success' do
+      = fa_icon :plus
+      = t('buttons.new.depart')
+  %thead
+    %tr
+      %th= Depart.human_attribute_name(:d_name)
+      %th
+
+  %tbody
+    - @departs.each do |depart|
+      %tr
+        %td.center= depart.d_name
+        %td.right
+          = link_to depart, class: 'btn btn-warning' do
+            = fa_icon :eye
+            = t('buttons.show')
+          = link_to edit_depart_path(depart), class: 'btn btn-info' do
+            = fa_icon :edit
+            = t('buttons.edit')
+          = link_to depart, :method => :delete, 
+          :data => { :confirm => t('buttons.confirm.depart') }, 
+          class: 'btn btn-danger' do
+            = fa_icon :times
+            = t('buttons.destroy')
+
+

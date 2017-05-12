@@ -1,0 +1,15 @@
+.col-md-6
+  %div{class: 'panel panel-'+ (i==1 ? 'success' : 'info')}
+    .panel-heading
+      -if i==1
+        Редактирование отдела
+      -else
+        Новый отдел
+      .clearfix
+    .panel-body
+      .row
+        .col-md-6
+          .form-group
+            = fr.label :d_name
+            = fr.text_field :d_name, class: 'form-control'
+            = fr.error_messages_for(:d_name)

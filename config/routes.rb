@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+  resources :projects do
+    member do
+      get :change_empl
+    end
+  end
+  resources :empls do
+    member do
+      get :change_depart
+    end
+  end
+  resources :departs
   resources :role_users
   resources :roles
   resources :password_resets

@@ -16,7 +16,13 @@ ru:
     confirm:
       user: Действительно удалить пользователя?
       role: Действительно удалить роль?
-    new: 
+      depart: Действительно удалить отдел?
+      empl: Действительно удалить Сотрудника? 
+      project: Действительно удалить проект?  
+    new:
+      depart: Новый отдел
+      empl: Новый сотрудник
+      project: Новый проект
       user: Новый пользователь
       role: Новая роль
   headers:
@@ -37,8 +43,27 @@ ru:
       truncate: …
   activerecord:
     models:
+      depart: Отдел
+      empl: Сотрудник
+      project: Проект
       user: Пользователь
     attributes:
+      empl:
+        last_name: Фамилия
+        first_name: Имя
+        second_name: Отчество
+        birthday: Дата рождения
+        passport: Серия/номер паспорта
+        inn: ИНН
+        post: Должность
+        depart: Отдел
+      project:
+        p_name: Название
+        cost: Цена
+        time_start: Дата начала
+        time_finish: Дата окончания
+      depart:
+        d_name: Название
       user:
         email: Пользовательское имя/электронная почта
         birthday: Дата рождения
@@ -49,7 +74,7 @@ ru:
         activation_token_expires_at: Дата прекращения действия токена активации
         last_login_at: Время последнего входа в систему
         role_users: Роли
-      role: 
+      role:
         name: Обозначение
         info: Краткое название
         full_info: Описание
@@ -63,4 +88,20 @@ ru:
       user/role_users:
         <<: *role_users
       # nested_finish
-          
+      depart: 
+        d_name: Название
+      empl:
+        last_name: Фамилия
+        first_name: Имя
+        second_name: Отчество
+        birthday: Дата рождения
+        passport: Серия/номер паспорта
+        inn: ИНН
+        post: Должность
+        depart: Отдел
+      project:
+        p_name: Название
+        cost: Цена
+        time_start: Дата начала
+        time_finish: Дата окончания
+        empl: Сотрудники

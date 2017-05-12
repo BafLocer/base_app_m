@@ -1,0 +1,14 @@
+=breadcrumb_tag do
+  %li
+    Cотрудники
+  %li
+    = link_to 'Сотрудники', empls_path
+  %li.active
+    = t('headers.empls.new')
+
+.page-header
+  %h1= t('headers.empls.new')
+
+= render 'form'
+
+

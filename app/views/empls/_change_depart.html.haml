@@ -1,0 +1,11 @@
+%h3 Изменить отдел на существующий
+= form_for @empl, url: change_depart_empl_path(@empl), method: :get do |c|
+  .row
+    .col-md-6
+      .form-group
+        = c.label :depart
+        = c.select :depart_id, Depart.all.map{|ct| [ct.d_name, ct.id]},
+          {}, {class: 'form-control'}
+        = c.error_messages_for(:depart_id)
+  .form-actions
+    = c.submit nil, class: 'btn btn-primary'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170501085108) do
+ActiveRecord::Schema.define(version: 20170508111006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,46 @@ ActiveRecord::Schema.define(version: 20170501085108) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "departs", force: :cascade do |t|
+    t.text     "d_name",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "empls", force: :cascade do |t|
+    t.string   "last_name",   limit: 20, null: false
+    t.string   "first_name",  limit: 10, null: false
+    t.string   "second_name", limit: 20, null: false
+    t.date     "birthday",               null: false
+    t.string   "passport",    limit: 10, null: false
+    t.string   "inn",         limit: 7,  null: false
+    t.string   "post",        limit: 25, null: false
+    t.integer  "depart_id",              null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "empls", ["depart_id"], name: "index_empls_on_depart_id", using: :btree
+  add_index "empls", ["inn"], name: "index_empls_on_inn", unique: true, using: :btree
+  add_index "empls", ["passport"], name: "index_empls_on_passport", unique: true, using: :btree
+
+  create_table "empls_projects", id: false, force: :cascade do |t|
+    t.integer "empl_id",    null: false
+    t.integer "project_id", null: false
+  end
+
+  add_index "empls_projects", ["empl_id", "project_id"], name: "index_empls_projects_on_empl_id_and_project_id", using: :btree
+  add_index "empls_projects", ["project_id", "empl_id"], name: "index_empls_projects_on_project_id_and_empl_id", using: :btree
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "p_name",      limit: 25, null: false
+    t.integer  "cost",                   null: false
+    t.date     "time_start",             null: false
+    t.date     "time_finish",            null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "role_users", force: :cascade do |t|
     t.integer  "role_id",    null: false
@@ -96,6 +136,7 @@ ActiveRecord::Schema.define(version: 20170501085108) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
+  add_foreign_key "empls", "departs"
   add_foreign_key "role_users", "roles"
   add_foreign_key "role_users", "users"
 end

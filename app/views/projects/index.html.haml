@@ -1,0 +1,42 @@
+=breadcrumb_tag do
+  %li.active
+    Проекты
+  %li
+    Администрирование
+
+.page-header
+  %h1= t('headers.projects.Список проектов')
+
+%table.table.table-hover.table-striped
+  %caption
+    = link_to new_project_path, class: 'btn btn-success' do
+      = fa_icon :plus
+      = t('buttons.new.project')
+  %thead
+    %tr
+      %th= Project.human_attribute_name(:p_name)
+      %th= Project.human_attribute_name(:cost)
+      %th= Project.human_attribute_name(:time_start)
+      %th= Project.human_attribute_name(:time_finish)
+      %th
+
+  %tbody
+    - @projects.each do |project|
+      %tr
+        %td.center= project.p_name
+        %td.center= project.cost
+        %td.center= project.time_start
+        %td.center= project.time_finish
+        %td.right
+          = link_to project, class: 'btn btn-warning' do
+            = fa_icon :eye
+            = t('buttons.show')
+          = link_to edit_project_path(project), class: 'btn btn-info' do
+            = fa_icon :edit
+            = t('buttons.edit')
+          = link_to project, :method => :delete, 
+          :data => { :confirm => t('buttons.confirm.project') }, 
+          class: 'btn btn-danger' do
+            = fa_icon :times
+            = t('buttons.destroy')
+

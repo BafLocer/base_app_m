@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  p_name: MyString
+  cost: 1
+  time_start: 2017-05-08
+  time_finish: 2017-05-08
+
+two:
+  p_name: MyString
+  cost: 1
+  time_start: 2017-05-08
+  time_finish: 2017-05-08

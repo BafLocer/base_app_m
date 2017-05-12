@@ -1,0 +1,26 @@
+=breadcrumb_tag do
+  %li
+    Сотрудники
+  %li
+    = link_to 'Сотрудники', empls_path
+ 
+
+
+
+%dl
+  %dt= Empl.human_attribute_name(:last_name)
+  %dd= @empl.last_name
+  %dt= Empl.human_attribute_name(:first_name)
+  %dd= @empl.first_name
+  %dt= Empl.human_attribute_name(:second_name)
+  %dd= @empl.second_name
+  %dt= Empl.human_attribute_name(:passport)
+  %dd= @empl.passport
+  %dt= Empl.human_attribute_name(:inn)
+  %dd= @empl.inn
+  %dt= Empl.human_attribute_name(:post)
+  %dd= @empl.post
+  %dt= Empl.human_attribute_name(:depart)
+  %dd= @empl.depart
+
+

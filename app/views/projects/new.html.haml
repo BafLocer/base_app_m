@@ -1,0 +1,12 @@
+=breadcrumb_tag do
+  %li
+    Проекты
+  %li
+    = link_to 'Проекты', projects_path
+  %li.active
+    = t('headers.projects.new')
+
+.page-header
+  %h1= t('headers.projects.new')
+
+= render 'form'

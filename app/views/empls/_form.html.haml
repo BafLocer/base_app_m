@@ -1,0 +1,59 @@
+= form_for @empl do |f|
+  = error_messages_for @empl
+  .row
+    .col-md-6
+      .form-group
+        = f.label :last_name
+        = f.text_field :last_name, class: 'form-control'
+        = f.error_messages_for(:last_name)
+    .col-md-6
+      .form-group
+        = f.label :first_name
+        = f.text_field :first_name, class: 'form-control'
+        = f.error_messages_for(:first_name)
+    .col-md-6
+      .form-group
+        = f.label :second_name
+        = f.text_field :second_name, class: 'form-control'
+        = f.error_messages_for(:second_name)
+    .col-md-6
+      .form-group
+        = f.label :birthday
+        .input-group.date.datepicker
+          = f.text_field(:birthday, value: lnil(f.object.birthday),
+          class: 'form-control')
+          %span.input-group-addon
+            %span.glyphicon.glyphicon-calendar
+        = f.error_messages_for(:birthday)
+    .col-md-6
+      .form-group
+        = f.label :passport
+        = f.text_field :passport, class: 'form-control'
+        = f.error_messages_for(:passport)
+    .col-md-6
+      .form-group
+        = f.label :inn
+        = f.text_field :inn, class: 'form-control'
+        = f.error_messages_for(:inn)
+  .row
+    .col-md-6
+      .form-group
+        = f.label :post
+        = f.text_field :post, class: 'form-control'
+        = f.error_messages_for(:post)
+    - if @empl.new_record?
+      .col-md-6
+        .form-group
+          = f.label :depart
+          = f.select :depart_id, Depart.all.map{|x| [x.d_name, x.id]},
+            {:include_blank => 'Выбрать отдел'}, {class: 'form-control'}
+          = f.error_messages_for(:depart_id)
+      .row
+        = link_to_add_depart(f)
+  .row
+    = f.fields_for(:depart) do |fr|
+      = fr.hidden_field(:id)
+      = render('empls/depart_form', fr: fr, i: 1) 
+  .form-actions.bottom10
+    = f.submit nil, class: 'btn btn-primary'
+      

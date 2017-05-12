@@ -1,0 +1,26 @@
+=breadcrumb_tag do
+  %li
+    Сотрудники
+  %li
+    = link_to 'Сотрудники', empls_path
+  %li
+    = link_to(@empl)
+  %li.active
+    = t('headers.empls.edit')
+
+.page-header
+  %h1= t('headers.empls.edit')
+
+= render 'form'
+
+%h3 Выбор другого отдела
+= form_for @empl, url: change_depart_empl_path(@empl), method: :get do |f|
+  .row
+    .col-md-6
+      .form-group
+        = f.label :depart
+        = f.select :depart_id, Depart.all.map{|x| [x.d_name, x.id]},
+          {}, {class: 'form-control'}
+        = f.error_messages_for(:depart_id)
+  .form-actions
+    = f.submit nil, class: 'btn btn-primary'
