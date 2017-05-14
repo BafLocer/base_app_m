@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :change_empl]
+  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  skip_before_action :check_ctr_auth, only: [:new, :create]
+  skip_before_filter :require_login, :only => [:new, :create]
 
   # GET /projects
   # GET /projects.json
@@ -60,19 +62,7 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  def change_empl
-    @project.empl = Empl.find_by_id(params[:project][:empl_id])
-    respond_to do |f|
-      if @project.save
-        f.html { redirect_to @project, notice: 'Проект изменен.' }
-        f.json { render :show, status: :ok, location: @project }
-      else
-        r.empl = empl; r.save
-        f.html { render :edit }
-        f.json { render json: @project.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -83,6 +73,61 @@ class ProjectsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
       params.require(:project).permit(:p_name, :cost, :time_start, :time_finish,
-      empls_attributes: [:id, :_destroy, :last_name, :first_name, :second_name, :birthday, :passport, :inn, :post, :depart_id])
+      {emplproj_attributes: [:_destroy, :id, :empl_id]}
+      )
+
+    end
+    def check_ctr_auth()
+      case action_name.to_sym
+      when :show
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+        if @current_role_user.try(:is_operator?)
+          return true
+        end
+      when :index
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+        if @current_role_user.try(:is_operator?)
+          return true
+        end
+      when :new
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+        if @current_role_user.try(:is_operator?)
+          return false
+        end
+      when :create
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+        if @current_role_user.try(:is_operator?)
+          return false
+        end
+      when :edit
+        if @current_role_user.try(:is_operator?)
+          return false
+        end
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+      when :destroy
+        if @current_role_user.try(:is_operator?)
+          return false
+        end
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+      else
+        if @current_role_user.try(:is_operator?)
+          return false
+        end
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+      end
     end
 end

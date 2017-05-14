@@ -1,7 +1,19 @@
-%h1 Редактировать проект
+=breadcrumb_tag do
+  %li.active
+    = t('headers.projects.edit')
+  %li
+    = link_to(@project)
+  %li
+    = link_to 'Проекты', projects_path
+  %li
+    Администрирование
+    
+.page-header
+  %h1= t('headers.projects.edit')
 
 = render 'form'
 
-= link_to 'просмотр', @project
-\|
-= link_to 'назад', projects_path
+%br
+= link_to @project, class: 'btn btn-info' do
+  = fa_icon "eye"
+  = t('buttons.show')

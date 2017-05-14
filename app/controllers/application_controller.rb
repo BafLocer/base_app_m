@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :require_login
   before_action :check_app_auth
+ #получение методов проверки роли
+  include ApplicationHelper
 
   private
   ## Выбор текущей роли и проверка прав доступа для неё у данного пользователя

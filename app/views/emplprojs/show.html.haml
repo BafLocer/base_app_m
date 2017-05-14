@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Empl:
+  = @emplproj.empl
+%p
+  %b Project:
+  = @emplproj.project
+
+= link_to 'Edit', edit_emplproj_path(@emplproj)
+\|
+= link_to 'Back', emplprojs_path

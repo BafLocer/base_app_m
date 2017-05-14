@@ -1,0 +1,21 @@
+-# nested_start
+.col-md-6
+  %div{class: 'panel panel-'+ (i.kind_of?(Integer) ? 'success' : 'info')}
+    .panel-heading
+      Сотрудник
+      = i
+      %span.toright
+        = link_to_remove_empl(fr)
+      .clearfix
+    .panel-body
+      .row
+        .col-md-6
+          .form-group
+            = fr.label :empl_id
+            = fr.select(:empl_id,
+            options_for_select(empl_options, fr.object.empl_id),
+            {}, class: 'form-control')
+            -# role_options ищите в roles_heper
+            = fr.error_messages_for(:empl_id)
+        
+-# nested_finish

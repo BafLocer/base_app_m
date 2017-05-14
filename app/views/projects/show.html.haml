@@ -1,18 +1,34 @@
-%p#notice= notice
+=breadcrumb_tag do
+  %li
+    Проекты
+  %li
+    = link_to 'Проекты', projects_path
 
-%p
-  %b Название:
-  = @project.p_name
-%p
-  %b Цена:
-  = @project.cost
-%p
-  %b Дата начала:
-  = @project.time_start
-%p
-  %b Дата окончания:
-  = @project.time_finish
+.container
+  .row
+    .col-md-10
+      .panel.panel-default
+        .panel-heading
+        .list-group
+          %p.list-group-item
+            %b Название:
+            = @project.p_name
+          %p.list-group-item
+            %b Цена:
+            = @project.cost
+          %p.list-group-item
+            %b Дата начала: 
+            = @project.time_start
+          %p.list-group-item
+            %b Дата окончания: 
+            = @project.time_finish
+        .panel-body
+          = link_to  edit_project_path(@project), class: 'btn btn-primary' do
+            = fa_icon :edit
+            = t('buttons.edit')
+          = link_to  projects_path, class: 'btn btn-warning' do
+            = t('buttons.Назад')
 
-= link_to 'редактировать', edit_project_path(@project)
-\|
-= link_to 'назад', projects_path
+
+
+

@@ -1,8 +1,10 @@
 class EmplsController < ApplicationController
   before_action :set_empl, only: [:show, :edit, :update, :destroy, :change_depart]
-  
+  skip_before_action :check_ctr_auth, only: [:new, :create]
+  skip_before_filter :require_login, :only => [:new, :create]
 
- 
+
+
 
   # GET /empls
   # GET /empls.json
@@ -86,7 +88,60 @@ class EmplsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def empl_params
-      params.require(:empl).permit(:last_name, :first_name, :second_name, :birthday, :passport, :inn, :post, :depart_id, 
+      params.require(:empl).permit(:last_name, :first_name, :second_name, :birthday, :passport, :inn, :post, :depart_id,
       depart_attributes: [:id, :_destroy, :d_name])
+    end
+    def check_ctr_auth()
+      case action_name.to_sym
+      when :show
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+        if @current_role_user.try(:is_operator?)
+          return true
+        end
+      when :index
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+        if @current_role_user.try(:is_operator?)
+          return true
+        end
+      when :new
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+        if @current_role_user.try(:is_operator?)
+          return false
+        end
+      when :create
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+        if @current_role_user.try(:is_operator?)
+          return false
+        end
+      when :edit
+        if @current_role_user.try(:is_operator?)
+          return false
+        end
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+      when :destroy
+        if @current_role_user.try(:is_operator?)
+          return false
+        end
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+      else
+        if @current_role_user.try(:is_operator?)
+          return false
+        end
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+      end
     end
 end

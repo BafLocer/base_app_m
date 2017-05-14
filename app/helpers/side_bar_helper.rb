@@ -21,32 +21,21 @@ module SideBarHelper
       {:name => 'Роли',
        :controller => :roles, :action => :index,
        :icon => 'align-center',
-       :class => 'long'},
-      {:name => 'Отделы',
-       :controller => :departs, :action => :index,
-       :icon => 'align-center',
-       :class => 'long'},
+       :class => 'long'}
+    ]} 
+    result << {
+      :name => 'Нии',
+      :icon => 'flag',
+      :children => [
       {:name => 'Сотрудники',
        :controller => :empls, :action => :index,
-       :icon => 'align-center',
+       :icon => 'home',
        :class => 'long'},
       {:name => 'Проекты',
        :controller => :projects, :action => :index,
-       :icon => 'align-center',
-       :class => 'long'},
-    ]} 
-    result << {
-      :name => 'Заголовок ссылок',
-      :icon => 'search-plus',
-      :children => [
-      {:name => 'Ссылка ребёнок',
-       :controller => :welcome, :action => :index,
-       :icon => 'binoculars'},
-      {:name => 'Ссылка ребёнок',
-       :controller => :welcome, :action => :index,
-       :icon => 'search',
+       :icon => 'camera',
        :class => 'long'}
-    ]} 
+    ]}
     result
   end
   

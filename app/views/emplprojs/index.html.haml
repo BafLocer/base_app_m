@@ -1,0 +1,23 @@
+%h1 Listing emplprojs
+
+%table
+  %thead
+    %tr
+      %th Empl
+      %th Project
+      %th
+      %th
+      %th
+
+  %tbody
+    - @emplprojs.each do |emplproj|
+      %tr
+        %td= emplproj.empl
+        %td= emplproj.project
+        %td= link_to 'Show', emplproj
+        %td= link_to 'Edit', edit_emplproj_path(emplproj)
+        %td= link_to 'Destroy', emplproj, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Emplproj', new_emplproj_path

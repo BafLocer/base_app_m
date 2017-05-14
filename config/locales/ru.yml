@@ -105,3 +105,10 @@ ru:
         time_start: Дата начала
         time_finish: Дата окончания
         empl: Сотрудники
+      emplproj: &emplprojs
+        empl: Сотрудник
+        empl_id: Номер сотрудника
+        project: Проект
+        project_id: Номер проекта
+      project/emplprojs:
+        <<: *emplprojs

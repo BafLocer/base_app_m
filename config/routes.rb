@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  resources :emplprojs
   resources :projects do
     member do
-      get :change_empl
+      get :activate
     end
   end
   resources :empls do

@@ -3,24 +3,43 @@
     Сотрудники
   %li
     = link_to 'Сотрудники', empls_path
- 
+  %li
+    = @empl.id
 
+.container
+  .row
+    .col-md-10
+      .panel.panel-default
+        .panel-heading
+        .list-group
+          %p.list-group-item
+            %b Фамилия:
+            = @empl.last_name
+          %p.list-group-item
+            %b Имя: 
+            = @empl.first_name
+          %p.list-group-item
+            %b Отчество:
+            = @empl.second_name
+          %p.list-group-item
+            %b Пасспорт:
+            = @empl.passport
+          %p.list-group-item
+            %b Инн:
+            = @empl.inn
+          %p.list-group-item
+            %b Должность: 
+            =  @empl.post
+          %p.list-group-item
+            %b Отдел:
+            = @empl.depart
+        .panel-body
+          = link_to  edit_empl_path(@empl), class: 'btn btn-primary' do
+            = fa_icon :edit
+            = t('buttons.edit')
+          = link_to  empls_path, class: 'btn btn-warning' do
+            = t('buttons.Назад')
+         
 
-
-%dl
-  %dt= Empl.human_attribute_name(:last_name)
-  %dd= @empl.last_name
-  %dt= Empl.human_attribute_name(:first_name)
-  %dd= @empl.first_name
-  %dt= Empl.human_attribute_name(:second_name)
-  %dd= @empl.second_name
-  %dt= Empl.human_attribute_name(:passport)
-  %dd= @empl.passport
-  %dt= Empl.human_attribute_name(:inn)
-  %dd= @empl.inn
-  %dt= Empl.human_attribute_name(:post)
-  %dd= @empl.post
-  %dt= Empl.human_attribute_name(:depart)
-  %dd= @empl.depart
 
 
