@@ -58,6 +58,7 @@
       = f.select :depart_id, Depart.all.map{|x| [x.d_name, x.id]},
             {:include_blank => 'Выбрать отдел'}, {class: 'form-control'}
       = f.error_messages_for(:depart_id)
+    .row
   - else
     .col-md-12
       .form-group
