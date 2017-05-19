@@ -2,7 +2,8 @@
   %li
     Сотрудники
   %li
-    = link_to 'Сотрудники', empls_path
+    %li.active
+    = link_to t('headers.empl.search'), search_empls_path()
   %li
     = @empl.id
 
@@ -32,7 +33,7 @@
             =  @empl.post
           %p.list-group-item
             %b Отдел:
-            = @empl.depart
+            = @empl.depart.try(:d_name)
         .panel-body
           = link_to  edit_empl_path(@empl), class: 'btn btn-primary' do
             = fa_icon :edit

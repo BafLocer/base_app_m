@@ -12,8 +12,40 @@ class Empl < ActiveRecord::Base
 {only_integer: true}, uniqueness: true
   validates :passport, length: {is: 10},  presence: true, numericality:
 {only_integer: true}, uniqueness: true
-  accepts_nested_attributes_for :depart, allow_destroy: true
-  # Если объект удалился, то используем замену dependent: :nullify
+  validates :depart, presence: true
+  accepts_nested_attributes_for :depart, reject_if: :all_blank
+
+
+  def self.search(params)
+    result = Empl.includes(:depart).references(:depart)
+    if params['depart'].present?
+      result = result.where(departs: {d_name: params['d_name']})
+    end
+    if params['last_name'].present?
+      result = result.where(last_name: params['last_name'])
+    end
+    if params['first_name'].present?
+      result = result.where(first_name: params['first_name'])
+    end
+    if params['second_name'].present?
+      result = result.where(second_name: params['second_name'])
+    end
+    if params['birthday'].present?
+      result = result.where(birthday: params['birthday'])
+    end
+    if params['post'].present?
+      result = result.where(post: params['post'])
+    end
+    if params['inn'].present?
+      result = result.where(inn: params['inn'])
+    end
+     if params['ipassport'].present?
+      result = result.where(passport: params['passport'])
+    end
+     result.all
+  end
+  
+  
 
 
 

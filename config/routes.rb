@@ -6,10 +6,14 @@ Rails.application.routes.draw do
     end
   end
   resources :empls do
+    collection do
+      get :search
+    end
     member do
       get :change_depart
     end
   end
+ 
   resources :departs
   resources :role_users
   resources :roles

@@ -39,7 +39,7 @@
               %td.center= empl.passport
               %td.center= empl.inn
               %td.center= empl.post
-              %td.center= empl.depart
+              %td.center= empl.depart.try(:d_name)
               %td.right
                 = link_to empl, class: 'btn btn-warning' do
                   = fa_icon :eye

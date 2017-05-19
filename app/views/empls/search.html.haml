@@ -1,0 +1,75 @@
+=breadcrumb_tag do
+  %li.active
+    = link_to 'Сотрудники', empls_path
+  %li
+    = t('headers.empls.Поиск')
+
+.page-header
+  %h1= t('headers.empls.Поиск')
+
+
+.container
+  = form_tag(search_empls_path(), :method => "get") do
+    .row
+    = link_to empls_path, class: 'btn btn-warning' do
+      = t('buttons.Вернуться на страницу сотрудников')
+    .row
+      .col-md-5
+        .form-group
+          = label_tag 'search', "Фамилия:"
+          = text_field_tag 'search[last_name]', params['search']['last_name'], placeholder: "Введите фамилию", class: 'form-control'
+    .row
+      .col-md-5
+        .form-group
+          = label_tag 'search', "Имя:"
+          = text_field_tag 'search[first_name]', params['search']['first_name'], placeholder: "Введите имя", class: 'form-control'
+    .row
+      .col-md-5
+        .form-group
+          = label_tag 'search', "Отчество:"
+          = text_field_tag 'search[second_name]', params['search']['second_name'], placeholder: "Введите отчество", class: 'form-control'
+    .row
+      .col-md-5
+        .form-group
+          = label_tag 'search', "Дата рождения:"
+          = text_field_tag 'search[birthday]', params['search']['birthday'], placeholder: "Введите дату рождения в виде 01-12-1995", class: 'form-control'
+    .row
+      .col-md-5
+        .form-group
+          = label_tag 'search', "Должность:"
+          = text_field_tag 'search[post]', params['search']['post'], placeholder: "Введите должность", class: 'form-control'
+    .row
+      .col-md-5
+        .form-group
+          = label_tag 'search', "ИНН:"
+          = text_field_tag 'search[inn]', params['search']['inn'], placeholder: "Введите инн", class: 'form-control'
+    .row
+      .col-md-5
+        .form-group
+          = label_tag 'search', "Серия и номер паспорта:"
+          = text_field_tag 'search[passport]', params['search']['passport'], placeholder: "Введите серию и номер пасспорта(слитно)", class: 'form-control'
+    .row
+      .col-md-5
+        .form-group
+          = label_tag 'search', "Отдел:"
+          = text_field_tag 'search[depart]', params['search']['depart'], placeholder: "Введите отдел", class: 'form-control'
+    = submit_tag(:search_button, value: 'Поиск', class: 'btn btn-default')
+    = link_to search_empls_path, class: 'btn btn-warning' do
+      = t('buttons.Очистить')
+    = link_to root_path, class: "btn btn-primary" do
+      = t('buttons.Вернуться на главную страницу')
+  
+  %dl.dl-horizontal
+  - @empls.each do |empl|
+    .row
+      .col-md-9
+        %dt
+          %h3= t('headers.empl.Результат поиска')
+        %dd
+    .row
+      =empl.last_name.to_s + " / " + empl.first_name.to_s + " / " + empl.second_name.to_s + " / " + empl.birthday.to_s + " / " + empl.post.to_s + " / " + empl.inn.to_s + " / " + empl.passport.to_s + " / " + empl.depart.try(:d_name).to_s + " / "
+      = link_to empl, class: 'btn btn-info' do
+        = fa_icon "eye"
+        = t('buttons.show')
+    
+    

@@ -3,31 +3,30 @@
   .row
   .form-actions.bottom10
     = f.submit nil, class: 'btn btn-primary'
-    = link_to_add_depart(f)
   .row
     .col-md-6
       .form-group
         = f.label :last_name
-        = f.text_field :last_name, class: 'form-control'
+        = f.text_field :last_name, placeholder: "Введите фамилию", class: 'form-control'
         = f.error_messages_for(:last_name)
   .row
     .col-md-6
       .form-group
         = f.label :first_name
-        = f.text_field :first_name, class: 'form-control'
+        = f.text_field :first_name, placeholder: "Введите имя", class: 'form-control'
         = f.error_messages_for(:first_name)
   .row
     .col-md-6
       .form-group
         = f.label :second_name
-        = f.text_field :second_name, class: 'form-control'
+        = f.text_field :second_name, placeholder: "Введите отчество", class: 'form-control'
         = f.error_messages_for(:second_name)
   .row
     .col-md-6
       .form-group
         = f.label :birthday
         .input-group.date.datepicker
-          = f.text_field(:birthday, value: lnil(f.object.birthday),
+          = f.text_field(:birthday, value: lnil(f.object.birthday), placeholder: "Выберите дату рождения",
           class: 'form-control')
           %span.input-group-addon
             %span.glyphicon.glyphicon-calendar
@@ -36,34 +35,39 @@
     .col-md-6
       .form-group
         = f.label :passport
-        = f.text_field :passport, class: 'form-control'
+        = f.text_field :passport, placeholder: "Введите данные паспорта", class: 'form-control'
         = f.error_messages_for(:passport)
   .row
     .col-md-6
       .form-group
         = f.label :inn
-        = f.text_field :inn, class: 'form-control'
+        = f.text_field :inn, placeholder: "Введите данные инн", class: 'form-control'
         = f.error_messages_for(:inn)
   .row
     .col-md-6
       .form-group
         = f.label :post
-        = f.text_field :post, class: 'form-control'
+        = f.text_field :post, placeholder: "Введите название должности", class: 'form-control'
         = f.error_messages_for(:post)
   .row
   - if @empl.new_record?
-    .col-md-6
-      .form-group
-      = f.label :depart
-      = f.select :depart_id, Depart.all.map{|x| [x.d_name, x.id]},
-            {:include_blank => 'Выбрать отдел'}, {class: 'form-control'}
-      = f.error_messages_for(:depart_id)
     .row
+      .col-md-6
+        .form-group
+        = f.label :depart
+        = f.select :depart_id, Depart.all.map{|x| [x.d_name, x.id]},
+            {:include_blank => 'Выбрать отдел'}, {class: 'form-control'}
+        = f.error_messages_for(:depart_id)
+    .row
+      .col-md-13
+        .form-group
+        = link_to_add_depart(f)
   - else
-    .col-md-12
-      .form-group
-      = f.fields_for(:depart) do |fr|
-        = fr.hidden_field(:id)
-        = render('empls/depart_form', fr: fr, i: 1) 
+    .row
+      .col-md-13
+        .form-group
+        = f.fields_for(:depart) do |fr|
+          = fr.hidden_field(:id)
+          = render('empls/depart_form', fr: fr, i: 1) 
   
       

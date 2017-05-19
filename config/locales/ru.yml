@@ -1,5 +1,6 @@
 ru:
   app:
+    search: Информация о сотрудниках
     name: Базовое приложение
     company:
       short_name: МПУ
@@ -10,6 +11,7 @@ ru:
       submit: Сохранить
       update: Сохранить
   buttons:
+    search: Поиск
     edit: Редактировать
     destroy: Удалить
     show: Показать
@@ -57,6 +59,7 @@ ru:
         inn: ИНН
         post: Должность
         depart: Отдел
+        search: Поиск сотрудника
       project:
         p_name: Название
         cost: Цена

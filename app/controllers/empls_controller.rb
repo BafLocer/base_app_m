@@ -12,6 +12,15 @@ class EmplsController < ApplicationController
     @empls = Empl.all
   end
 
+  def search
+    if params.has_key?('search')
+      @empls = Empl.search(params['search'])
+    else
+      @empls = []
+    end
+    params['search'] ||= {}
+  end
+
   # GET /empls/1
   # GET /empls/1.json
   def show
