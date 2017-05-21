@@ -1,5 +1,17 @@
-%h1 Новый отдел
+=breadcrumb_tag do
+  %li
+    Отделы
+  %li
+    = link_to 'Отделы', departs_path
+  %li.active
+    = t('headers.departs.Новый отдел')
+  %li
+    Администрирование
+
+.page-header
+  %h1= t('headers.departs.Новый отдел')
 
 = render 'form'
 
-= link_to 'назад', departs_path
+= link_to  departs_path, class: 'btn btn-warning' do
+  = t('buttons.Назад')

@@ -1,9 +1,23 @@
-%p#notice= notice
+=breadcrumb_tag do
+  %li
+    Отделы
+  %li
+    = link_to 'Отделы', departs_path
+  %li
+    Администрирование
 
-%p
-  %b Название:
-  = @depart.d_name
-
-= link_to 'редактировать', edit_depart_path(@depart)
-\|
-= link_to 'назад', departs_path
+.container
+  .row
+    .col-md-10
+      .panel.panel-default
+        .panel-heading
+        .list-group
+          %p.list-group-item
+            %b Название:
+            = @depart.d_name
+        .panel-body
+          = link_to  edit_depart_path(@depart), class: 'btn btn-primary' do
+            = fa_icon :edit
+            = t('buttons.edit')
+          = link_to  departs_path, class: 'btn btn-warning' do
+            = t('buttons.Назад')

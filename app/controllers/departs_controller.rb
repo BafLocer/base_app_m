@@ -1,5 +1,7 @@
 class DepartsController < ApplicationController
   before_action :set_depart, only: [:show, :edit, :update, :destroy]
+  skip_before_action :check_ctr_auth, only: [:new, :create]
+  skip_before_filter :require_login, :only => [:new, :create]
 
   # GET /departs
   # GET /departs.json
@@ -70,5 +72,59 @@ class DepartsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def depart_params
       params.require(:depart).permit(:d_name)
+    end
+
+   def check_ctr_auth()
+      case action_name.to_sym
+      when :show
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+        if @current_role_user.try(:is_operator?)
+          return true
+        end
+      when :index
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+        if @current_role_user.try(:is_operator?)
+          return true
+        end
+      when :new
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+        if @current_role_user.try(:is_operator?)
+          return false
+        end
+      when :create
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+        if @current_role_user.try(:is_operator?)
+          return false
+        end
+      when :edit
+        if @current_role_user.try(:is_operator?)
+          return false
+        end
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+      when :destroy
+        if @current_role_user.try(:is_operator?)
+          return false
+        end
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+      else
+        if @current_role_user.try(:is_operator?)
+          return false
+        end
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+      end
     end
 end

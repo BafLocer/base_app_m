@@ -115,7 +115,7 @@ a
 #date_selector
   position: fixed
   left: $sidebar-width + 5px
-  top: $navbar-height + 5px
+  bottom: $navbar-height + 5px
   z-index: 1000
   border-radius: 5px 5px 5px 5px
   padding: 10px 10px 10px 10px
@@ -270,5 +270,31 @@ $percents: (90 85 80 75 70 65 60 55 50 40 30 20 10 5)
   .small#{$percent}
     font-size: #{$percent+'%'}
     padding: #{round($padding-base-vertical * $percent / 100)} #{round($padding-base-horizontal * $percent / 100)} #{round($padding-base-vertical * $percent / 100)} #{round($padding-base-horizontal * $percent / 100)}
+
+
 .bottom20
   padding-bottom: 20px
+.bottom10
+  padding-top: 20px
+
+
+th
+  text-align: center
+td
+  text-align: center
+
+@media screen and(max-width: 800px)
+  table thead
+    display: none
+  table tr
+    display: block
+    border-bottom: 3px solid #ddd
+  table td
+    display: block
+    text-align: right
+  table td:before
+    content: attr(data)
+    float: left
+    font-weight: bold
+
+

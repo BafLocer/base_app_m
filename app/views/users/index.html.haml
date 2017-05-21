@@ -23,8 +23,8 @@
   %tbody
     - @users.each do |user|
       %tr
-        %td.center= user.email
-        %td.center= lnil(user.birthday)
+        %td{:data => User.human_attribute_name(:email)}= user.email
+        %td{:data => User.human_attribute_name(:birthday)}= lnil(user.birthday)
         %td.right
           = link_to edit_user_path(user), class: 'btn btn-info' do
             = fa_icon :edit

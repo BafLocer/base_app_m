@@ -1,19 +1,19 @@
 =breadcrumb_tag do
-  %li.active
-    = t('headers.projects.edit')
-  %li
-    = link_to(@project)
   %li
     = link_to 'Проекты', projects_path
+  %li.active
+    = t('headers.projects.Редактирование')
   %li
     Администрирование
     
 .page-header
-  %h1= t('headers.projects.edit')
+  %h1= t('headers.projects.Редактирование')
 
 = render 'form'
 
-%br
-= link_to @project, class: 'btn btn-info' do
-  = fa_icon "eye"
-  = t('buttons.show')
+.container
+  .row
+    .panel-body
+
+= link_to  projects_path, class: 'btn btn-warning' do
+  = t('buttons.Назад')

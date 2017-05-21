@@ -3,13 +3,15 @@
     Сотрудники
   %li
     = link_to 'Сотрудники', empls_path
-  %li
-    = link_to(@empl)
   %li.active
     = t('headers.empls.Редактирование сотрудника')
+  %li
+    Администрирование
 
 .page-header
   %h1= t('headers.empls.Редактирование сотрудника')
+= link_to  projects_path, class: 'btn btn-warning' do
+  = t('buttons.Назад')
 
 = render 'form'
 
@@ -22,5 +24,5 @@
         = f.select :depart_id, Depart.all.map{|x| [x.d_name, x.id]},
           {}, {class: 'form-control'}
         = f.error_messages_for(:depart_id)
-  .form-actions
-    = f.submit nil, class: 'btn btn-primary'
+       
+  

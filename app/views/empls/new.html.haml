@@ -5,9 +5,13 @@
     = link_to 'Сотрудники', empls_path
   %li.active
     = t('headers.empls.Новый сотрудник')
+  %li
+    Администрирование
 
 .page-header
   %h1= t('headers.empls.Новый сотрудник')
+= link_to  empls_path, class: 'btn btn-warning' do
+  = t('buttons.Назад')
 
 = render 'form'
 

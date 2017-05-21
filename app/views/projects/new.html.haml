@@ -5,8 +5,14 @@
     = link_to 'Проекты', projects_path
   %li.active
     = t('headers.projects.Новый проект')
-
+  %li
+    Администрирование
 .page-header
   %h1= t('headers.projects.Новый проект')
 
+= link_to  projects_path, class: 'btn btn-warning' do
+  = t('buttons.Назад')
+
 = render 'form'
+
+

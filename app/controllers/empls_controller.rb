@@ -9,7 +9,7 @@ class EmplsController < ApplicationController
   # GET /empls
   # GET /empls.json
   def index
-    @empls = Empl.all
+    @empls = Empl.page params[:page]
   end
 
   def search
@@ -140,6 +140,13 @@ class EmplsController < ApplicationController
       when :destroy
         if @current_role_user.try(:is_operator?)
           return false
+        end
+        if @current_role_user.try(:is_admin?)
+          return true
+        end
+      when :search
+        if @current_role_user.try(:is_operator?)
+          return true
         end
         if @current_role_user.try(:is_admin?)
           return true

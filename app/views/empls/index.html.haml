@@ -2,52 +2,50 @@
   %li.active
     Сотрудники
   %li
+    = link_to 'Сорудники', empls_path
+  %li
     Администрирование
 
 .page-header
   %h1= t('headers.empls.Список сотрудников')
 
-
-.container
-  .row
-    .col-md-1
-      %table.table.table-hover.table-bordered
-        %caption
-          = link_to new_empl_path, class: 'btn btn-success' do
-            = fa_icon :plus
-            = t('buttons.new.empl')
-          
-        %thead
-          %tr
-            %th= Empl.human_attribute_name(:last_name)
-            %th= Empl.human_attribute_name(:first_name)
-            %th= Empl.human_attribute_name(:second_name)
-            %th= Empl.human_attribute_name(:birthday)
-            %th= Empl.human_attribute_name(:passport)
-            %th= Empl.human_attribute_name(:inn)
-            %th= Empl.human_attribute_name(:post)
-            %th= Empl.human_attribute_name(:depart)
-            %th
-
-        %tbody
-          - @empls.each do |empl|
-            %tr
-              %td.center= empl.last_name
-              %td.center= empl.first_name
-              %td.center= empl.second_name
-              %td.center= empl.birthday
-              %td.center= empl.passport
-              %td.center= empl.inn
-              %td.center= empl.post
-              %td.center= empl.depart.try(:d_name)
-              %td.right
-                = link_to empl, class: 'btn btn-warning' do
-                  = fa_icon :eye
-                  = t('buttons.show')
-                = link_to edit_empl_path(empl), class: 'btn btn-info' do
-                  = fa_icon :edit
-                  = t('buttons.edit')
-                = link_to empl, :method => :delete, :data => { :confirm => t('buttons.confirm.empl') }, class: 'btn btn-danger' do
-                  = fa_icon :times
-                  = t('buttons.destroy')
-            
+.table-responsive
+  %table.table.table-hover.table-striped.table-condensed
+    %caption
+      = link_to new_empl_path, class: 'btn btn-success' do
+        = fa_icon :plus
+        = t('buttons.new.empl')
+    %thead
+      %tr
+        %th= Empl.human_attribute_name(:last_name)
+        %th= Empl.human_attribute_name(:first_name)
+        %th= Empl.human_attribute_name(:second_name)
+        %th= Empl.human_attribute_name(:birthday)
+        %th= Empl.human_attribute_name(:passport)
+        %th= Empl.human_attribute_name(:inn)
+        %th= Empl.human_attribute_name(:post)
+        %th= Empl.human_attribute_name(:depart)
+        %th
+    %tbody
+      - @empls.each do |empl|
+        %tr
+          %td{:data => Empl.human_attribute_name(:last_name)}= empl.last_name
+          %td{:data => Empl.human_attribute_name(:first_name)}= empl.first_name
+          %td{:data => Empl.human_attribute_name(:second_name)}= empl.second_name
+          %td{:data => Empl.human_attribute_name(:birthday)}= empl.birthday
+          %td{:data => Empl.human_attribute_name(:passport)}= empl.passport
+          %td{:data => Empl.human_attribute_name(:inn)}= empl.inn
+          %td{:data => Empl.human_attribute_name(:post)}= empl.post
+          %td{:data => Empl.human_attribute_name(:depart)}= empl.depart.d_name
+          %td.right
+            = link_to empl, class: 'btn btn-warning' do
+              = fa_icon :eye
+              = t('buttons.show')
+              = link_to edit_empl_path(empl), class: 'btn btn-info' do
+                = fa_icon :edit
+                = t('buttons.edit')
+              = link_to empl, :method => :delete,
+                :data => { :confirm => t('buttons.confirm.empl') },
+                class: 'btn btn-danger' do
+                = fa_icon :times
+                = t('buttons.destroy')
