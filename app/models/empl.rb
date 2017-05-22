@@ -1,7 +1,7 @@
 class Empl < ActiveRecord::Base
   belongs_to :depart
 
-  has_many :emplprojs
+  has_many :emplprojs, inverse_of: :empl
   
 
   validates :last_name, length: {maximum: 20}, presence: true
@@ -18,9 +18,9 @@ class Empl < ActiveRecord::Base
 
 
   def self.search(params)
-    result = Empl.eager_load(:depart, :emplprojs, emplprojs: :project).references(:depart, :emplprojs, :project)
-    if params['p_name'].present?
-      result = result.where(projects: {p_name: params['p_name']})
+    result = Empl.eager_load(:depart, :emplprojs, emplprojs: :project).references(:depart, :project)
+    if params['project_id'].present?
+      result = result.where("emplprojs.project_id = ?", params['project_id'])
     end
     if params['depart'].present?
       result = result.where(departs: {d_name: params['d_name']})
