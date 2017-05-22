@@ -73,7 +73,7 @@ class ProjectsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
       params.require(:project).permit(:p_name, :cost, :time_start, :time_finish,
-      {emplproj_attributes: [:_destroy, :id, :empl_id]}
+      {emplprojs_attributes: [:_destroy, :id, :empl_id]}
       )
 
     end
