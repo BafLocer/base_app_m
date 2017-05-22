@@ -28,5 +28,8 @@ module EmplprojsHelper
       fa_icon('times', title: 'Удалить сотрудника') + ' Удалить'
     end
   end
+  def project_options()
+    Project.all.collect {|p| [p.p_name, p.id]}
+  end
   # nested_finish
 end

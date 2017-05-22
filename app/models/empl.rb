@@ -18,10 +18,7 @@ class Empl < ActiveRecord::Base
 
 
   def self.search(params)
-    result = Empl.eager_load(:depart, :emplprojs, emplprojs: :project).references(:depart, :project)
-    if params['project_id'].present?
-      result = result.where("emplprojs.project_id = ?", params['project_id'])
-    end
+    result = Empl.eager_load(:depart).references(:depart)
     if params['depart'].present?
       result = result.where(departs: {d_name: params['d_name']})
     end
@@ -43,7 +40,7 @@ class Empl < ActiveRecord::Base
     if params['inn'].present?
       result = result.where(inn: params['inn'])
     end
-     if params['ipassport'].present?
+     if params['passport'].present?
       result = result.where(passport: params['passport'])
     end
      result.all

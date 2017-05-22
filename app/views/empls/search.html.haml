@@ -57,11 +57,7 @@
         .form-group
           = label_tag 'search', "Отдел:"
           = text_field_tag 'search[depart]', params['search']['depart'], placeholder: "Введите отдел", class: 'form-control'
-    .row
-      .col-md-5
-        .form-group
-          = label_tag 'search', "Проект:"
-          = select_tag('search[project_id]' , options_for_select(project_options() ), {include_blank: true, class: 'form-control'})
+    
     = submit_tag(:search_button, value: 'Поиск', class: 'btn btn-default')
     = link_to search_empls_path, class: 'btn btn-warning' do
       = t('buttons.Очистить')
@@ -76,7 +72,7 @@
           %h3= t('headers.empl.Результат поиска')
         %dd
     .row
-      =empl.last_name.to_s + " / " + empl.first_name.to_s + " / " + empl.second_name.to_s + " / " + empl.birthday.to_s + " / " + empl.post.to_s + " / " + empl.inn.to_s + " / " + empl.passport.to_s + " / " + empl.depart.try(:d_name).to_s + " / " + empl.emplprojs.project(:id).to_s
+      =empl.last_name.to_s + " / " + empl.first_name.to_s + " / " + empl.second_name.to_s + " / " + empl.birthday.to_s + " / " + empl.post.to_s + " / " + empl.inn.to_s + " / " + empl.passport.to_s + " / " + empl.depart.try(:d_name).to_s 
       = link_to empl, class: 'btn btn-info' do
         = fa_icon "eye"
         = t('buttons.show')
