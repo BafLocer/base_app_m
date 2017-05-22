@@ -76,7 +76,7 @@
           %h3= t('headers.empl.Результат поиска')
         %dd
     .row
-      =empl.last_name.to_s + " / " + empl.first_name.to_s + " / " + empl.second_name.to_s + " / " + empl.birthday.to_s + " / " + empl.post.to_s + " / " + empl.inn.to_s + " / " + empl.passport.to_s + " / " + empl.depart.try(:d_name).to_s + " / " + empl.emplprojs.project.(:id)
+      =empl.last_name.to_s + " / " + empl.first_name.to_s + " / " + empl.second_name.to_s + " / " + empl.birthday.to_s + " / " + empl.post.to_s + " / " + empl.inn.to_s + " / " + empl.passport.to_s + " / " + empl.depart.try(:d_name).to_s + " / " + empl.emplprojs.project(:id).to_s
       = link_to empl, class: 'btn btn-info' do
         = fa_icon "eye"
         = t('buttons.show')
