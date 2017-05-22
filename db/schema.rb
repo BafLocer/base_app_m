@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20170514073412) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "emplprojs", ["empl_id", "project_id"], name: "index_emplprojs_on_empl_id_and_project_id", unique: true, using: :btree
   add_index "emplprojs", ["empl_id"], name: "index_emplprojs_on_empl_id", using: :btree
   add_index "emplprojs", ["project_id"], name: "index_emplprojs_on_project_id", using: :btree
 

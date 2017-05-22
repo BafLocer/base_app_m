@@ -19,8 +19,8 @@ class Empl < ActiveRecord::Base
 
   def self.search(params)
     result = Empl.eager_load(:depart).references(:depart)
-    if params['depart'].present?
-      result = result.where(departs: {d_name: params['d_name']})
+    if params['depart_id'].present?
+      result = result.where(depart_id: params['depart_id'])
     end
     if params['last_name'].present?
       result = result.where(last_name: params['last_name'])
