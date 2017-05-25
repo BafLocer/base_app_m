@@ -18,7 +18,10 @@ class Empl < ActiveRecord::Base
 
 
   def self.search(params)
-    result = Empl.eager_load(:depart).references(:depart)
+    result = Empl.eager_load(:depart, :emplprojs, emplprojs: :project).references(:depart)
+    if params['project_id'].present?
+      result = result.where("emplprojs.project_id = ?", params['project_id'])
+    end
     if params['depart_id'].present?
       result = result.where(depart_id: params['depart_id'])
     end

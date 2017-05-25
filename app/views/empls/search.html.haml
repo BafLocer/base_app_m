@@ -55,6 +55,12 @@
     .row
       .col-md-5
         .form-group
+          = label_tag 'search', "Проекты:"
+          = select_tag('search[project_id]' , options_for_select(project_options(),), {include_blank: true, class: 'form-control'})
+     
+    .row
+      .col-md-5
+        .form-group
           = label_tag 'search', "Отдел:"
           = select_tag('search[depart_id]' , options_for_select(depart_for_select(), ), {include_blank: true, class: 'form-control'})
     
@@ -71,8 +77,39 @@
         %dt
           %h3= t('headers.empl.Результат поиска')
         %dd
-    .row
-      =empl.last_name.to_s + " / " + empl.first_name.to_s + " / " + empl.second_name.to_s + " / " + empl.birthday.to_s + " / " + empl.post.to_s + " / " + empl.inn.to_s + " / " + empl.passport.to_s + " / " + empl.depart.try(:d_name).to_s 
+        %ul
+          %li
+            = Empl.human_attribute_name(:last_name) + ":"
+            = empl.last_name
+        %ul
+          %li
+            = Empl.human_attribute_name(:first_name) + ":"
+            = empl.first_name
+        %ul
+          %li
+            = Empl.human_attribute_name(:second_name) + ":"
+            = empl.second_name
+        %ul
+          %li
+            = Empl.human_attribute_name(:birthday) + ":"
+            = empl.birthday
+        %ul
+          %li
+            = Empl.human_attribute_name(:post) + ":"
+            = empl.post
+        %ul
+          %li
+            = Empl.human_attribute_name(:inn) + ":"
+            = empl.inn
+        %ul
+          %li
+            = Empl.human_attribute_name(:passport) + ":"
+            = empl.passport
+        %ul
+          %li
+            = Depart.human_attribute_name(:Отдел) + ":"
+            = empl.depart.d_name
+    .row   
       = link_to empl, class: 'btn btn-info' do
         = fa_icon "eye"
         = t('buttons.show')

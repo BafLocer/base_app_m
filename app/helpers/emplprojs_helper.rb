@@ -7,7 +7,7 @@ module EmplprojsHelper
     # Все role_users в форме имеют свой номер
     # Мы его пока заменям на фразу new_ru
     fields = form.fields_for(:emplprojs, new_object,
-      :child_index => 'emplproj') do |fr|
+      :child_index => 'new_empl') do |fr|
       render('projects/one_empl_form', fr: fr, i: 'Новый')
     end
     # Ссылка будет обрабатываться javascript-ом поэтому адрес фиктивный

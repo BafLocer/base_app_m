@@ -1,45 +1,45 @@
 = form_for @project do |f|
   = error_messages_for @project
   .row
-  .form-actions.bottom20
-    = f.submit nil, class: 'btn btn-primary'
-  - if @current_role_user.present? and @current_role_user.is_admin?
-    .col_md-12
-      = link_to_add_empl(f, f.object)
-  -i = 0
-  = f.fields_for(:emplprojs) do |fr|
-    = fr.hidden_field(:id)
-    = render("projects/one_empl_form", fr: fr, i: i + 1)
-  .row
-    .col-md-6
-      .form-group
-        = f.label :p_name
-        = f.text_field :p_name, placeholder: "Введите название проекта", class: 'form-control'
-        = f.error_messages_for(:p_name)
-  .row
-    .col-md-6
-      .form-group
-        = f.label :cost
-        = f.text_field :cost, placeholder: "Введите цену", class: 'form-control'
-        = f.error_messages_for(:cost)
-  .row
-    .col-md-6
-      .form-group
-        = f.label :time_start
-        .input-group.date.datepicker
-          = f.text_field(:time_start, value: lnil(f.object.time_start), placeholder: "Выберите дату начала",
-          class: 'form-control')
-          %span.input-group-addon
-            %span.glyphicon.glyphicon-calendar
-        = f.error_messages_for(:time_start)
-  .row
-    .col-md-6
-      .form-group
-        = f.label :time_finish
-        .input-group.date.datepicker
-          = f.text_field(:time_finish, value: lnil(f.object.time_finish), placeholder: "Выберите дату окончания",
-          class: 'form-control')
-          %span.input-group-addon
-            %span.glyphicon.glyphicon-calendar
-        = f.error_messages_for(:time_finish)
-  
+    .form-actions.bottom20
+      = f.submit nil, class: 'btn btn-primary'
+    - if @current_role_user.present? and @current_role_user.is_admin?
+      .col_md-12
+        = link_to_add_empl(f, f.object)
+    -i = 0
+    = f.fields_for(:emplprojs) do |fr|
+      = fr.hidden_field(:id)
+      = render("projects/one_empl_form", fr: fr, i: i + 1)
+    .row
+      .col-md-6
+        .form-group
+          = f.label :p_name
+          = f.text_field :p_name, placeholder: "Введите название проекта", class: 'form-control'
+          = f.error_messages_for(:p_name)
+    .row
+      .col-md-6
+        .form-group
+          = f.label :cost
+          = f.text_field :cost, placeholder: "Введите цену", class: 'form-control'
+          = f.error_messages_for(:cost)
+    .row
+      .col-md-6
+        .form-group
+          = f.label :time_start
+          .input-group.date.datepicker
+            = f.text_field(:time_start, value: lnil(f.object.time_start), placeholder: "Выберите дату начала",
+            class: 'form-control')
+            %span.input-group-addon
+              %span.glyphicon.glyphicon-calendar
+          = f.error_messages_for(:time_start)
+    .row
+      .col-md-6
+        .form-group
+          = f.label :time_finish
+          .input-group.date.datepicker
+            = f.text_field(:time_finish, value: lnil(f.object.time_finish), placeholder: "Выберите дату окончания",
+            class: 'form-control')
+            %span.input-group-addon
+              %span.glyphicon.glyphicon-calendar
+          = f.error_messages_for(:time_finish)
+    
